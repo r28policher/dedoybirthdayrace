@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-published="true" data-exported="1789880737653" data-build="5"><head>
+<html lang="en" data-published="true" data-exported="1789881630814" data-build="6"><head>
     <script>
       (function() {
         // Capture host references before any artifact code runs: Window.parent
@@ -613,9 +613,10 @@ body.editing .add{display:flex!important}
 #drawer .colors{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 #linkbox{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:95;width:min(560px,calc(100vw - 24px));background:#fff;color:#14161b;border:3px solid #14161b;border-radius:16px;padding:14px 16px;box-shadow:8px 8px 0 var(--red);font:600 14px/1.4 system-ui,sans-serif}
 #linkbox p{margin:0 0 10px}
-#linkbox .lb-row{display:flex;gap:8px}
-#linkbox input{flex:1;min-width:0;padding:10px 12px;border:2px solid #14161b;border-radius:10px;font:14px system-ui,sans-serif}
+#linkbox .lb-row{display:flex;flex-wrap:wrap;gap:8px}
+#linkbox input{flex:1 1 100%;min-width:0;padding:10px 12px;border:2px solid #14161b;border-radius:10px;font:14px system-ui,sans-serif}
 #linkbox button{border:0;border-radius:10px;padding:10px 14px;background:#14161b;color:#ffd500;font:700 14px system-ui,sans-serif;cursor:pointer}
+#linkbox #linkbox-open{flex:1;text-align:center;text-decoration:none;border-radius:10px;padding:10px 14px;background:#e10600;color:#fff;font:700 14px system-ui,sans-serif}
 #linkbox #linkbox-close{background:#e4e6ea;color:#14161b;font-size:20px;line-height:1;padding:8px 12px}
 #toast{position:fixed;left:50%;top:18px;transform:translate(-50%,-140%);z-index:90;background:#14161b;color:#fff;padding:12px 18px;border-radius:12px;font:600 14px system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .25s ease;max-width:calc(100vw - 32px);text-align:center}
 #toast.show{transform:translate(-50%,0)}
@@ -678,8 +679,8 @@ body.editing .add{display:flex!important}
       <div class="clock" id="clock">
         <div><b id="cd-d">83</b><span data-edit="line">Days</span></div>
         <div><b id="cd-h">00</b><span data-edit="line">Hours</span></div>
-        <div><b id="cd-m">54</b><span data-edit="line">Minutes</span></div>
-        <div><b id="cd-s">23</b><span data-edit="line">Seconds</span></div>
+        <div><b id="cd-m">39</b><span data-edit="line">Minutes</span></div>
+        <div><b id="cd-s">30</b><span data-edit="line">Seconds</span></div>
       </div>
       <p class="done" id="cd-done" data-edit="line">It's race day! Green flag!</p>
     </div>
@@ -716,7 +717,7 @@ body.editing .add{display:flex!important}
           <button class="rm edit-only" data-remove=".pass" aria-label="Remove this card">×</button>
           <div class="pass-head"><span class="emoji" data-edit="line">📍</span><h3 data-edit="line">Place</h3></div>
           <div class="pass-body">
-            <p class="big" data-edit="line">Speedway Party Hall</p>
+            <p class="big" data-edit="line">KFC</p>
             <p class="note" data-edit="text">Taguig City</p>
             <a class="link" data-map-link="" href="https://maps.app.goo.gl/9jVdCc128UBZMp6o6" data-edit="line" target="_blank" rel="noopener">Get directions</a>
           </div>
@@ -803,7 +804,11 @@ body.editing .add{display:flex!important}
           <div class="ph" data-photo=""><img data-art="g3" alt=""></div>
           <figcaption data-edit="line">Full throttle</figcaption>
         </figure>
-      </div>
+      <figure class="shot">
+    <button class="rm edit-only" data-remove=".shot" aria-label="Remove this photo">×</button>
+    <div class="ph" data-photo=""><img data-art="g4" alt=""></div>
+    <figcaption data-edit="line">Cake time</figcaption>
+  </figure></div>
       <button type="button" class="add edit-only" data-add="shot" data-into="#shots">+ Add photos</button>
     </div>
   </section>
@@ -895,14 +900,14 @@ body.editing .add{display:flex!important}
 <button type="button" id="fab" hidden="">✏️ Edit page</button>
 
 <div id="bar" hidden="">
-  <span class="status" id="status">Editing</span>
+  <span class="status" id="status">Downloaded index.html</span>
   <button type="button" data-act="settings">⚙️ Settings</button>
   <button type="button" data-act="download" class="go">⬇️ Download page</button>
   <button type="button" data-act="reset">Reset</button>
   <button type="button" data-act="done">Done</button>
 </div>
 
-<aside id="drawer" aria-label="Page settings">
+<aside id="drawer" aria-label="Page settings" class="">
   <header><b>Page settings</b><button type="button" data-close="" aria-label="Close settings">×</button></header>
   <div class="dbody">
     <h4>Party date and time</h4>
@@ -915,7 +920,7 @@ body.editing .add{display:flex!important}
 
     <h4>Collect RSVPs in Google Forms</h4>
     <label>Google Form link<input type="url" data-set="gform" placeholder="https://docs.google.com/forms/d/e/.../viewform"></label>
-    <p class="hint" id="gf-status"></p>
+    <p class="hint ok" id="gf-status">Connected (simple mode). Your Google Form is shown right on the page. For the racing-styled form instead, paste a pre-filled link (steps below).</p>
     <p class="hint"><b>Simple mode:</b> paste your form's long link (docs.google.com/forms/d/e/.../viewform) and Google's own form appears on the page.</p>
     <p class="hint"><b>Racing-styled form:</b> in your Google Form (questions in this order: name, number of guests, optional message), open the ⋮ menu, choose <b>Get pre-filled link</b>, type an answer in every question, click <b>Get link</b>, copy it and paste it above instead.</p>
 
@@ -948,10 +953,11 @@ body.editing .add{display:flex!important}
 </aside>
 
 <div id="linkbox" hidden="">
-  <p>Your browser blocked the new tab. Copy this link and paste it into a new browser tab:</p>
+  <p>Your viewer blocked the new tab. Tap <b>Open link</b>, or copy the link and paste it into a new browser tab.</p>
   <div class="lb-row">
     <input id="linkbox-url" readonly="" aria-label="Link to open">
-    <button type="button" id="linkbox-copy">Copy link</button>
+    <a id="linkbox-open" href="#" target="_blank" rel="noopener noreferrer">Open link</a>
+    <button type="button" id="linkbox-copy">Copy</button>
     <button type="button" id="linkbox-close" aria-label="Close">×</button>
   </div>
 </div>
@@ -1014,18 +1020,38 @@ const ART = {
     <rect x="95" y="196" width="210" height="58" rx="29" fill="#23262d"/><rect x="115" y="208" width="170" height="34" rx="17" fill="#3a3f4a"/>
     <rect x="110" y="138" width="180" height="58" rx="29" fill="#e10600"/><rect x="130" y="150" width="140" height="34" rx="17" fill="#ff5a4f"/>
     <rect x="95" y="80" width="210" height="58" rx="29" fill="#23262d"/><rect x="115" y="92" width="170" height="34" rx="17" fill="#3a3f4a"/>
-    <path d="M0 262h400v38H0z" fill="#14161b"/></svg>`
+    <path d="M0 262h400v38H0z" fill="#14161b"/></svg>`,
+  g4: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#fff8e7"/><path d="M0 258h400v42H0z" fill="#14161b"/>
+    <ellipse cx="200" cy="250" rx="135" ry="12" fill="#c9ccd3"/>
+    <rect x="115" y="146" width="170" height="98" rx="10" fill="#e10600"/><rect x="115" y="205" width="170" height="10" fill="#ffd500"/>
+    <rect x="115" y="134" width="170" height="30" rx="14" fill="#fff"/><g fill="#fff"><circle cx="140" cy="166" r="9"/><circle cx="180" cy="168" r="9"/><circle cx="222" cy="166" r="9"/><circle cx="262" cy="168" r="9"/></g>
+    <text x="200" y="197" text-anchor="middle" font-family="Impact,Arial Black,sans-serif" font-size="42" fill="#fff">5</text>
+    <rect x="193" y="92" width="14" height="44" rx="3" fill="#ffd500"/><path d="M200 58c10 12 12 20 0 28-12-8-10-16 0-28z" fill="#ff9f1c"/></svg>`
 };
 const svgURI = s => 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(s.replace(/\s+/g, ' ').trim());
 const fillArt = () => $$('img[data-art]').forEach(img => { if (!img.getAttribute('src') && ART[img.dataset.art]) img.src = svgURI(ART[img.dataset.art]); });
 
 /* ---------- Opening links (works even where new tabs are blocked, e.g. preview panes) ---------- */
+function showLinkBox(url){
+  const box = $('#linkbox'), inp = $('#linkbox-url');
+  inp.value = url; $('#linkbox-open').href = url; box.hidden = false;
+}
 function openExternal(url){
+  // 1) the normal way
   let w = null;
   try { w = window.open(url, '_blank'); } catch (e) {}
   if (w) { try { w.opener = null; } catch (e) {} return; }
-  const box = $('#linkbox'), inp = $('#linkbox-url');
-  inp.value = url; box.hidden = false; inp.focus(); inp.select();
+  // 2) some viewers only allow tabs from a real link element, so try that next
+  let left = false;
+  const gone = () => { left = true; };
+  window.addEventListener('blur', gone, { once: true });
+  window.addEventListener('pagehide', gone, { once: true });
+  document.addEventListener('visibilitychange', gone, { once: true });
+  const a = document.createElement('a');
+  a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.style.display = 'none';
+  document.body.appendChild(a); a.click(); a.remove();
+  // 3) if nothing happened, show a link the person can tap or copy
+  setTimeout(() => { window.removeEventListener('blur', gone); window.removeEventListener('pagehide', gone); document.removeEventListener('visibilitychange', gone); if (!left) showLinkBox(url); }, 900);
 }
 $('#linkbox-copy').addEventListener('click', () => {
   const inp = $('#linkbox-url'); inp.focus(); inp.select();
@@ -1070,9 +1096,11 @@ function loadDraft(){
   if (published && location.hash !== '#edit') return;     // guests always see the file as published
   try {
     const d = JSON.parse(localStorage.getItem(KEY) || 'null');
-    if (!d || d.build !== (root.dataset.build || '')) return; // draft was made with an older version of the file
+    const cur = root.dataset.build || '';
+    if (!d || (d.build !== cur && d.build !== '5')) return;   // draft was made with an incompatible older version
     if (d.t <= (+root.dataset.exported || 0)) return;        // the downloaded file is newer than the draft
     page.innerHTML = d.page;
+    if (d.build === '5' && !$('img[data-art="g4"]', page)) { const box = $('#shots', page); if (box) box.append(makeNode('shot')); const im = $('#shots .shot:last-child img', page); if (im) im.dataset.art = 'g4'; const cap = $('#shots .shot:last-child figcaption', page); if (cap) cap.textContent = 'Cake time'; }
     Object.assign(body.dataset, d.data);
     if (d.style) root.setAttribute('style', d.style);
     if (d.title) document.title = d.title;
